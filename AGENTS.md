@@ -1,20 +1,26 @@
 # AGENTS.md
 
-## Ralph Loop Instructions
+## Repo Quality Bar
+- Production-quality, maintainable, testable code.
+- Prefer clarity over cleverness; avoid hacks.
+- Add/update docs or tests when behavior changes.
 
-You are running in a Ralph Loop - an autonomous coding loop.
+## Ralph Loop Inputs
+- `prd.json`: structured scope items (category, description, steps, risk, passes).
+- `progress.txt`: append-only progress log each iteration.
+- `scripts/feedback.sh`: run feedback loops before commit.
 
-### Each iteration:
-1. Read `RALPH_TASK.md` and find the first unchecked `[ ]` task
-2. Implement that single task
-3. Run tests: `pytest tests/ -v` (if tests exist)
-4. If tests pass: mark the task `[x]` in RALPH_TASK.md
-5. Commit: `git add -A && git commit -m "ralph: <description>"`
-6. If ALL tasks are complete, output `<ralph>COMPLETE</ralph>`
-7. Otherwise, output `<ralph>CONTINUE</ralph>`
+## Each Iteration
+1. Read `prd.json` and pick the highest-risk/priority item with `passes: false`.
+2. If the item is too large, split it into smaller items in `prd.json`.
+3. Implement ONLY that single item.
+4. Run feedback loops (prefer `bash scripts/feedback.sh` if present).
+5. If loops pass, set that item's `passes` to `true` and append to `progress.txt`.
+6. Commit with `ralph: <short description>`.
+7. If all items pass, output `<ralph>COMPLETE</ralph>`, else `<ralph>CONTINUE</ralph>`.
 
-### Rules:
-- Only work on ONE task per iteration
-- Always run feedback loops (tests/lint) before committing
-- Never commit if tests fail - fix first
-- Keep changes small and focused
+## Rules
+- One logical change per commit; keep changes small and focused.
+- Do not mark `passes: true` unless all verification steps succeed.
+- Never commit if feedback loops fail; fix first.
+- If blocked, document the blocker in `progress.txt` and stop.

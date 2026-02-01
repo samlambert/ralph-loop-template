@@ -1,11 +1,6 @@
 # RALPH_TASK.md
 
-## Tasks
+This template now uses `prd.json` for scoped tasks and progress tracking.
 
-- [ ] Example task 1
-- [ ] Example task 2
-- [ ] Example task 3
-
-## Done Criteria
-
-All boxes checked = done.
+If you prefer checkbox-style lists, you can repurpose this file and update
+`prompts/ralph.md` accordingly.

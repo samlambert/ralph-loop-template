@@ -4,13 +4,20 @@
 
 set -e
 
-PROMPT="@AGENTS.md @RALPH_TASK.md
+DEFAULT_PROMPT="@AGENTS.md @prd.json @progress.txt @prompts/ralph.md"
+PROMPT=${RALPH_PROMPT:-$DEFAULT_PROMPT}
+DEFAULT_MODEL=${RALPH_MODEL:-gpt-5.2-codex}
+RUNNER=${RALPH_RUNNER:-dockersandbox}
+RUNNER_ARGS=${RALPH_RUNNER_ARGS:-"run agent --force --model ${DEFAULT_MODEL}"}
 
-Read RALPH_TASK.md. Find the first unchecked [ ] task.
-Implement it. Run tests if they exist.
-If pass: mark [x], commit with 'ralph: description'.
-Output <ralph>COMPLETE</ralph> if all done, else <ralph>CONTINUE</ralph>.
-"
+if ! command -v "$RUNNER" >/dev/null 2>&1; then
+    echo "Runner not found: $RUNNER" >&2
+    exit 1
+fi
+
+run_ralph() {
+    "$RUNNER" $RUNNER_ARGS -p "$PROMPT"
+}
 
 echo "Running single Ralph iteration..."
-claude -p "$PROMPT"
+run_ralph

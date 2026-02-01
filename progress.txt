@@ -1,0 +1,6 @@
+# progress.txt
+# Append entries per iteration:
+# - PRD item completed (id)
+# - Key decisions and why
+# - Files changed
+# - Blockers or notes for next iteration

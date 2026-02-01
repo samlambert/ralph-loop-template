@@ -1,0 +1,41 @@
+[
+  {
+    "id": "example-1",
+    "category": "functional",
+    "description": "Example: add a new command to list projects.",
+    "steps": [
+      "Run the command with no args.",
+      "Verify it prints a table of projects.",
+      "Confirm tests pass."
+    ],
+    "risk": "high",
+    "priority": "high",
+    "passes": false
+  },
+  {
+    "id": "example-2",
+    "category": "integration",
+    "description": "Example: integrate the new command with config loading.",
+    "steps": [
+      "Set a custom config path.",
+      "Run the command and confirm it reads the config.",
+      "Confirm tests pass."
+    ],
+    "risk": "medium",
+    "priority": "medium",
+    "passes": false
+  },
+  {
+    "id": "example-3",
+    "category": "docs",
+    "description": "Example: document the new command in the README.",
+    "steps": [
+      "Add a usage example.",
+      "Run the example to verify it works.",
+      "Confirm docs are clear."
+    ],
+    "risk": "low",
+    "priority": "low",
+    "passes": false
+  }
+]
